@@ -37,8 +37,8 @@ runs:
   - shell: pwsh
     run: |
       
-      # This script loads a system environment variable into the current
-      # job process.
+      # This script loads a user or system environment variable into 
+      # the current job process.
       function LoadVar()
       {
           [CmdletBinding()]
