@@ -1,0 +1,73 @@
+#------------------------------------------------------------------------------
+# Loads the values of important JOBRUNNER system environment variables into the
+# current job.  Here's the list of variables loaded:
+# 
+#   NF_BUILD
+#   NF_CACHE
+#   NF_CODEDOC
+#   NF_REPOS
+#   NF_ROOT
+#   NF_SAMPLES_CADENCE
+#   NF_SNIPPETS
+#   NF_TEMP
+#   NF_TEST
+#   NF_TOOLBIN
+# 
+#   NC_ACTIONS_ROOT
+#   NC_BUILD
+#   NC_CACHE
+#   NC_NUGET_DEVFEED
+#   NC_NUGET_VERSIONER
+#   NC_REPOS
+#   NC_ROOT
+#   NC_TEMP
+#   NC_TEST
+#   NC_TOOLBIN
+
+name: neon-environment
+description: Loads important JOBRUNNER system environment variables into the current job.
+inputs:
+  branch:
+    description: Optionally specifies the branch or tag (defaults to "master")
+    required: false
+    default: master
+runs:
+  using: composite
+  steps:
+  - shell: pwsh
+    run: |
+      
+      # This script loads a system environment variable into the current
+      # job process.
+      function LoadVar()
+      {
+          [CmdletBinding()]
+          param (
+              [Parameter(Position=0, Mandatory=1)]
+              [string]$variable
+          )
+          
+          # Try the USER variables first
+
+          if (($item = $(Get-ItemProperty -Path "HKCU:\Environment" -Name $variable -ErrorAction SilentlyContinue)))
+          {
+              process.env[$variable] = $item.$variable
+              return
+          }
+          
+          # Fall-back to the system variables
+          
+          if (($item = $(Get-ItemProperty -Path "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" -Name $variable -ErrorAction SilentlyContinue)))
+          {
+              process.env[$variable] = $item.$variable
+              return
+          }
+          else
+          {
+              throw "The [$variable] environment variable does not exist."
+          }
+      }
+      
+      
+      
+    
