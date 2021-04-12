@@ -37,9 +37,8 @@ runs:
   - shell: pwsh
     run: |
       
-      # This script loads a user or system environment variable into 
-      # the current job process.
-      function LoadVar()
+      # Loads a user or system environment variable into the current job process.
+      function LoadVariable()
       {
           [CmdletBinding()]
           param (
@@ -51,7 +50,7 @@ runs:
 
           if (($item = $(Get-ItemProperty -Path "HKCU:\Environment" -Name $variable -ErrorAction SilentlyContinue)))
           {
-              process.env[$variable] = $item.$variable
+              [System.Environment]::SetEnvironmentVariable($variable, $item.$variable)
               return
           }
           
@@ -59,7 +58,7 @@ runs:
           
           if (($item = $(Get-ItemProperty -Path "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" -Name $variable -ErrorAction SilentlyContinue)))
           {
-              process.env[$variable] = $item.$variable
+              [System.Environment]::SetEnvironmentVariable($variable, $item.$variable)
               return
           }
           else
@@ -67,7 +66,25 @@ runs:
               throw "The [$variable] environment variable does not exist."
           }
       }
-      
-      
-      
-    
+
+      LoadVariable NF_BUILD
+      LoadVariable NF_CACHE
+      LoadVariable NF_CODEDOC
+      LoadVariable NF_REPOS
+      LoadVariable NF_ROOT
+      LoadVariable NF_SAMPLES_CADENCE
+      LoadVariable NF_SNIPPETS
+      LoadVariable NF_TEMP
+      LoadVariable NF_TEST
+      LoadVariable NF_TOOLBIN
+ 
+      LoadVariable NC_ACTIONS_ROOT
+      LoadVariable NC_BUILD
+      LoadVariable NC_CACHE
+      LoadVariable NC_NUGET_DEVFEED
+      LoadVariable NC_NUGET_VERSIONER
+      LoadVariable NC_REPOS
+      LoadVariable NC_ROOT
+      LoadVariable NC_TEMP
+      LoadVariable NC_TEST
+      LoadVariable NC_TOOLBIN
