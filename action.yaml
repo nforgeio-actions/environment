@@ -55,7 +55,7 @@ runs:
               return
           }
           
-          # Fall-back to the system variables
+          # Fall-back to the SYSTEM variables
           
           if (($item = $(Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" -Name $variable -ErrorAction SilentlyContinue)))
           {
