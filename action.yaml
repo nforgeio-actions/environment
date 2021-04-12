@@ -57,7 +57,7 @@ runs:
           
           # Fall-back to the system variables
           
-          if (($item = $(Get-ItemProperty -Path "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" -Name $variable -ErrorAction SilentlyContinue)))
+          if (($item = $(Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" -Name $variable -ErrorAction SilentlyContinue)))
           {
               [System.Environment]::SetEnvironmentVariable($variable, $item.$variable)
               return
