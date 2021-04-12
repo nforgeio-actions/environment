@@ -1,11 +1,12 @@
 #------------------------------------------------------------------------------
 # Loads the values of important JOBRUNNER system environment variables into the
 # current job.  Here's the list of variables loaded:
+#
+#   NF_REPOS
 # 
 #   NF_BUILD
 #   NF_CACHE
 #   NF_CODEDOC
-#   NF_REPOS
 #   NF_ROOT
 #   NF_SAMPLES_CADENCE
 #   NF_SNIPPETS
@@ -68,11 +69,12 @@ runs:
       }
       
       # Load the environment variables
+      
+      LoadVariable NF_REPOS
 
       LoadVariable NF_BUILD
       LoadVariable NF_CACHE
       LoadVariable NF_CODEDOC
-      LoadVariable NF_REPOS
       LoadVariable NF_ROOT
       LoadVariable NF_SAMPLES_CADENCE
       LoadVariable NF_SNIPPETS
