@@ -38,7 +38,7 @@ runs:
     run: |
       
       # Loads a user or system environment variable into the current job process.
-      function LoadVariable()
+      function LoadVariable
       {
           [CmdletBinding()]
           param (
