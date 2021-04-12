@@ -66,6 +66,8 @@ runs:
               throw "The [$variable] environment variable does not exist."
           }
       }
+      
+      # Load the environment variables
 
       LoadVariable NF_BUILD
       LoadVariable NF_CACHE
