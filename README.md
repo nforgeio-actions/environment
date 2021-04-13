@@ -31,7 +31,7 @@ NC_TOOLBIN
 
 ## Examples
 
-Load the system environment variables:
+**Load the system environment variables:**
 ```
 - uses: nforgeio-actions/neon-environment
 ```
