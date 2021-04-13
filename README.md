@@ -1,4 +1,7 @@
 # neon-environment
+
+**INTERNAL USE ONLY:** This GitHub action is not intended for general use.  The only reason why this repo is public is because GitHub requires it.
+
 GitHub Action that loads JOBRUNNER system environment variables into the current job.
 
 These are the system variables currently loaded by the action:
