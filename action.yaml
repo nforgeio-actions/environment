@@ -92,29 +92,29 @@ runs:
       Write-Output "COMPUTERNAME=$computername" >> $env:GITHUB_ENV
       
       # Load the environment variables
-      /*
-      LoadVariable NF_REPOS
+      
+      #LoadVariable NF_REPOS
 
-      LoadVariable NF_BUILD
-      LoadVariable NF_CACHE
-      LoadVariable NF_CODEDOC
-      LoadVariable NF_ROOT
-      LoadVariable NF_SAMPLES_CADENCE
-      LoadVariable NF_SNIPPETS
-      LoadVariable NF_TEMP
-      LoadVariable NF_TEST
-      LoadVariable NF_TOOLBIN
+      #LoadVariable NF_BUILD
+      #LoadVariable NF_CACHE
+      #LoadVariable NF_CODEDOC
+      #LoadVariable NF_ROOT
+      #LoadVariable NF_SAMPLES_CADENCE
+      #LoadVariable NF_SNIPPETS
+      #LoadVariable NF_TEMP
+      #LoadVariable NF_TEST
+      #LoadVariable NF_TOOLBIN
  
-      LoadVariable NC_ACTIONS_ROOT
-      LoadVariable NC_BUILD
-      LoadVariable NC_CACHE
-      LoadVariable NC_NUGET_DEVFEED
-      LoadVariable NC_NUGET_VERSIONER
-      LoadVariable NC_REPOS
-      LoadVariable NC_ROOT
-      LoadVariable NC_TEMP
-      LoadVariable NC_TEST
-      LoadVariable NC_TOOLBIN
-      */
+      #LoadVariable NC_ACTIONS_ROOT
+      #LoadVariable NC_BUILD
+      #LoadVariable NC_CACHE
+      #LoadVariable NC_NUGET_DEVFEED
+      #LoadVariable NC_NUGET_VERSIONER
+      #LoadVariable NC_REPOS
+      #LoadVariable NC_ROOT
+      #LoadVariable NC_TEMP
+      #LoadVariable NC_TEST
+      #LoadVariable NC_TOOLBIN
+      
       Get-ChildItem env:
       
