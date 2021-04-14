@@ -27,18 +27,16 @@
 #   NC_TOOLBIN
 #
 # GitHub workflows don't seem to load host environment variables into the [env]
-# context and the runner also seems to clear most actual environment variables
-# when it starts job processes.  This is probably a good idea in general because
-# this prevents workflows from taking depedencies on the hosting environment.
+# context.  This is probably a good idea in general because this prevents workflows
+# from taking depedencies on the hosting environment.
 #
 # This is a problem though for neonFORGE projects because our build scripts rely
 # on environment variables and we've configured these on our self-hosted runners.
 #
 # This action loads obtains the environment variables above directly from the
 # system/user registries or via APIs in special cases (like COMPUTERNAME) and
-# then adds these to the current job process as environment variables (so they'll
-# be available to subprocesses) as well as to the [env] context (so they'll be
-# available to subsequent job steps and actions.
+# then adds these to the current job process as environment variables so they'll
+# be available to all job steps.
 
 name: neon-environment
 description: Loads important JOBRUNNER system environment variables into the current job.
@@ -90,28 +88,28 @@ runs:
       
       # Load the environment variables
       
-      #LoadVariable NF_REPOS
+      LoadVariable NF_REPOS
 
-      #LoadVariable NF_BUILD
-      #LoadVariable NF_CACHE
-      #LoadVariable NF_CODEDOC
-      #LoadVariable NF_ROOT
-      #LoadVariable NF_SAMPLES_CADENCE
-      #LoadVariable NF_SNIPPETS
-      #LoadVariable NF_TEMP
-      #LoadVariable NF_TEST
-      #LoadVariable NF_TOOLBIN
+      LoadVariable NF_BUILD
+      LoadVariable NF_CACHE
+      LoadVariable NF_CODEDOC
+      LoadVariable NF_ROOT
+      LoadVariable NF_SAMPLES_CADENCE
+      LoadVariable NF_SNIPPETS
+      LoadVariable NF_TEMP
+      LoadVariable NF_TEST
+      LoadVariable NF_TOOLBIN
  
-      #LoadVariable NC_ACTIONS_ROOT
-      #LoadVariable NC_BUILD
-      #LoadVariable NC_CACHE
-      #LoadVariable NC_NUGET_DEVFEED
-      #LoadVariable NC_NUGET_VERSIONER
-      #LoadVariable NC_REPOS
-      #LoadVariable NC_ROOT
-      #LoadVariable NC_TEMP
-      #LoadVariable NC_TEST
-      #LoadVariable NC_TOOLBIN
+      LoadVariable NC_ACTIONS_ROOT
+      LoadVariable NC_BUILD
+      LoadVariable NC_CACHE
+      LoadVariable NC_NUGET_DEVFEED
+      LoadVariable NC_NUGET_VERSIONER
+      LoadVariable NC_REPOS
+      LoadVariable NC_ROOT
+      LoadVariable NC_TEMP
+      LoadVariable NC_TEST
+      LoadVariable NC_TOOLBIN
       
       Get-ChildItem env:
       
