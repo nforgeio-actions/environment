@@ -2,9 +2,9 @@
 
 **INTERNAL USE ONLY:** This GitHub action is not intended for general use.  The only reason why this repo is public is because GitHub requires it.
 
-GitHub Action that loads JOBRUNNER system environment variables into the current job.
-
-These are the system variables currently loaded by the action:
+Loads the values of important JOBRUNNER system environment variables into the
+current job as well as the process' environment.  Here's the list of variables
+we're currently loading:
 ```
 COMPUTERNAME
 NF_REPOS
@@ -30,10 +30,34 @@ NC_TEMP
 NC_TEST
 NC_TOOLBIN
 ```
+GitHub workflows don't seem to load host environment variables into the **env**
+context.  This is probably a good idea in general because this prevents workflows
+from taking depedencies on the hosting environment.
+
+This is a problem though for neonFORGE projects because our build scripts rely
+on environment variables and we've configured these on our self-hosted runners.
+
+This action loads obtains the environment variables above directly from the
+system/user registries or via APIs in special cases (like COMPUTERNAME) and
+then adds these to the current job process as environment variables so they'll
+be available to all job steps.
+
+This action also sets the MASTER_PASSWORD environment variable to the 
+**master-password** when a value is passed.  The MASTER_PASSWORD environment 
+variable is used by the underlying Powershell deployment scripts to access the
+current user's 1Password secrets on headless jobrunner machines.
 
 ## Examples
 
-**Load the system environment variables:**
+**Load the system environment variables (without master password):**
 ```
 - uses: nforgeio-actions/neon-environment
+```
+
+
+**Load the system environment variables (with master password):**
+```
+- uses: nforgeio-actions/neon-environment
+  with:
+    master-password: ${{ env:DEVBOT_MASTER_PASSWORD }}
 ```
