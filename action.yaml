@@ -115,3 +115,6 @@ runs:
       LoadVariable NC_TEMP
       LoadVariable NC_TEST
       LoadVariable NC_TOOLBIN
+      
+      Get-ChildItem env:
+      
