@@ -3,6 +3,7 @@
 # current job as well as the process' environment.  Here's the list of variables
 # we're currently loading:
 #
+#   COMPUTERNAME
 #   NF_REPOS
 # 
 #   NF_BUILD
