@@ -71,7 +71,7 @@ runs:
       
       # Load the environment variables
       
-      LoadVariable COMPUTERNAME
+      # LoadVariable COMPUTERNAME
       LoadVariable NF_REPOS
 
       LoadVariable NF_BUILD
