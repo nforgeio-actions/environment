@@ -1,6 +1,7 @@
 #------------------------------------------------------------------------------
 # Loads the values of important JOBRUNNER system environment variables into the
-# current job.  Here's the list of variables loaded:
+# current job as well as the process' environment.  Here's the list of variables
+# we're currently loading:
 #
 #   NF_REPOS
 # 
@@ -24,6 +25,20 @@
 #   NC_TEMP
 #   NC_TEST
 #   NC_TOOLBIN
+#
+# GitHub workflows don't seem to load host environment variables into the [env]
+# context and the runner also seems to clear most actual environment variables
+# when it starts job processes.  This is probably a good idea in general because
+# this prevents workflows from taking depedencies on the hosting environment.
+#
+# This is a problem though for neonFORGE projects because our build scripts rely
+# on environment variables and we've configured these on our self-hosted runners.
+#
+# This action loads obtains the environment variables above directly from the
+# system/user registries or via APIs in special cases (like COMPUTERNAME) and
+# then adds these to the current job process as environment variables (so they'll
+# be available to subprocesses) as well as to the [env] context (so they'll be
+# available to subsequent job steps and actions.
 
 name: neon-environment
 description: Loads important JOBRUNNER system environment variables into the current job.
@@ -51,6 +66,7 @@ runs:
 
           if (($item = $(Get-ItemProperty -Path "HKCU:\Environment" -Name $variable -ErrorAction SilentlyContinue)))
           {
+              [System.Environment]:SetEnvironmentVariable($variable, item.$variable)
               Write-Output "$variable=$item.$variable" >> $env:GITHUB_ENV
               return
           }
@@ -59,6 +75,7 @@ runs:
           
           if (($item = $(Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" -Name $variable -ErrorAction SilentlyContinue)))
           {
+              [System.Environment]:SetEnvironmentVariable($variable, item.$variable)
               Write-Output "$variable=$item.$variable" >> $env:GITHUB_ENV
               return
           }
@@ -71,6 +88,7 @@ runs:
       # COMPUTERNAME is a special case
       
       $computername = [System.Net.Dns]::GetHostName()
+      [System.Environment]:SetEnvironmentVariable($"COMPUTERNAME", $computername)
       Write-Output "COMPUTERNAME=$computername" >> $env:GITHUB_ENV
       
       # Load the environment variables
