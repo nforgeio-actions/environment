@@ -60,25 +60,14 @@ runs:
               [string]$variable
           )
           
-          # Try the USER variables first
-
-          if (($item = $(Get-ItemProperty -Path "HKCU:\Environment" -Name $variable -ErrorAction SilentlyContinue)))
+          $value = [System.Environment]::GetEnvironmentVariable($variable)
+          
+          if ([System.String]::IsNullOrEmpty($value))
           {
-              Write-Output "$variable=$item.$variable" >> $env:GITHUB_ENV
-              return
+             throw "The [$variable] environment variable does not exist."
           }
           
-          # Fall-back to the SYSTEM variables
-          
-          if (($item = $(Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" -Name $variable -ErrorAction SilentlyContinue)))
-          {
-              Write-Output "$variable=$item.$variable" >> $env:GITHUB_ENV
-              return
-          }
-          else
-          {
-              throw "The [$variable] environment variable does not exist."
-          }
+          Write-Output "$variable=$value" >> $env:GITHUB_ENV
       }
       
       # COMPUTERNAME is a special case
