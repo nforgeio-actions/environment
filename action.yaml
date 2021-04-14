@@ -88,7 +88,7 @@ runs:
       # COMPUTERNAME is a special case
       
       $computername = [System.Net.Dns]::GetHostName()
-      [System.Environment]::SetEnvironmentVariable($"COMPUTERNAME", $computername)
+      [System.Environment]::SetEnvironmentVariable("COMPUTERNAME", $computername)
       Write-Output "COMPUTERNAME=$computername" >> $env:GITHUB_ENV
       
       # Load the environment variables
