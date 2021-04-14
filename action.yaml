@@ -92,7 +92,7 @@ runs:
       Write-Output "COMPUTERNAME=$computername" >> $env:GITHUB_ENV
       
       # Load the environment variables
-      
+      /*
       LoadVariable NF_REPOS
 
       LoadVariable NF_BUILD
@@ -115,6 +115,6 @@ runs:
       LoadVariable NC_TEMP
       LoadVariable NC_TEST
       LoadVariable NC_TOOLBIN
-      
+      */
       Get-ChildItem env:
       
