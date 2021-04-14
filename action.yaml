@@ -2,7 +2,6 @@
 # Loads the values of important JOBRUNNER system environment variables into the
 # current job.  Here's the list of variables loaded:
 #
-#   COMPUTERNAME
 #   NF_REPOS
 # 
 #   NF_BUILD
@@ -71,7 +70,6 @@ runs:
       
       # Load the environment variables
       
-      # LoadVariable COMPUTERNAME
       LoadVariable NF_REPOS
 
       LoadVariable NF_BUILD
