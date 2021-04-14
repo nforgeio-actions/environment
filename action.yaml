@@ -70,7 +70,8 @@ runs:
       
       # COMPUTERNAME is a special case
       
-      [System.Environment]::SetEnvironmentVariable("COMPUTERNAME", [System.Net.Dns]::GetHostName())
+      $computername = [System.Net.Dns]::GetHostName()
+      [System.Environment]::SetEnvironmentVariable("COMPUTERNAME", $computername)
       
       # Load the environment variables
       
