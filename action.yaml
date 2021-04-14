@@ -68,6 +68,10 @@ runs:
           }
       }
       
+      # COMPUTERNAME is a special case
+      
+      [System.Environment]::SetEnvironmentVariable("COMPUTERNAME", [System.Net.Dns]::GetHostName())
+      
       # Load the environment variables
       
       LoadVariable NF_REPOS
