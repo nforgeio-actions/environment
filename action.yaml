@@ -37,14 +37,20 @@
 # system/user registries or via APIs in special cases (like COMPUTERNAME) and
 # then adds these to the current job process as environment variables so they'll
 # be available to all job steps.
+#
+# This action also sets the MASTER_PASSWORD environment variable to the
+# [secrets.DEVBOT_MASTER_PASSWORD] value by default or the [master-password]
+# input value.  The MASTER_PASSWORD environment variable us used by the 
+# underlying Powershell deployment scripts to access the current user's 1Password
+# secrets on headless machines.
 
 name: neon-environment
 description: Loads important JOBRUNNER system environment variables into the current job.
 inputs:
-  branch:
-    description: Optionally specifies the branch or tag (defaults to "master")
+  master-password:
+    description: Optionally specifies master 1Password to override [secrets.DEVBOT_MASTER_PASSWORD].
     required: false
-    default: master
+    default: ${{ secrets.DEVBOT_MASTER_PASSWORD }}
 runs:
   using: composite
   steps:
@@ -100,5 +106,7 @@ runs:
       LoadVariable NC_TEST
       LoadVariable NC_TOOLBIN
       
-      Get-ChildItem env:
+      # Set the master 1Password environment variable
+      
+      [System.Environment]::SetEnvironmentVariable("MASTER_PASSWORD", ${{ inputs.master-password }})
       
