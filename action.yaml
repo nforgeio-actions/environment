@@ -38,19 +38,17 @@
 # then adds these to the current job process as environment variables so they'll
 # be available to all job steps.
 #
-# This action also sets the MASTER_PASSWORD environment variable to the
-# [secrets.DEVBOT_MASTER_PASSWORD] value by default or the [master-password]
-# input value.  The MASTER_PASSWORD environment variable us used by the 
-# underlying Powershell deployment scripts to access the current user's 1Password
-# secrets on headless machines.
+# This action also sets the MASTER_PASSWORD environment variable to the 
+# [master-password] when a value is passed.  The MASTER_PASSWORD environment 
+# variable is used by the underlying Powershell deployment scripts to access the
+# current user's 1Password secrets on headless jobrunner machines.
 
 name: neon-environment
 description: Loads important JOBRUNNER system environment variables into the current job.
 inputs:
   master-password:
-    description: Optionally specifies master 1Password to override [secrets.DEVBOT_MASTER_PASSWORD].
+    description: Specifies master 1Password to override [secrets.DEVBOT_MASTER_PASSWORD].
     required: false
-    default: ${{ secrets.DEVBOT_MASTER_PASSWORD }}
 runs:
   using: composite
   steps:
@@ -108,5 +106,10 @@ runs:
       
       # Set the master 1Password environment variable
       
-      [System.Environment]::SetEnvironmentVariable("MASTER_PASSWORD", ${{ inputs.master-password }})
+      $masterPassword = ${{ inputs.master-password }}
+      
+      if (![System.String]::IsNullOrEmpty($masterPassword))
+      {
+          [System.Environment]::SetEnvironmentVariable("MASTER_PASSWORD", $masterPassword)
+      }
       
