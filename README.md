@@ -6,10 +6,12 @@ GitHub Action that loads JOBRUNNER system environment variables into the current
 
 These are the system variables currently loaded by the action:
 ```
+COMPUTERNAME
+NF_REPOS
+
 NF_BUILD
 NF_CACHE
 NF_CODEDOC
-NF_REPOS
 NF_ROOT
 NF_SAMPLES_CADENCE
 NF_SNIPPETS
