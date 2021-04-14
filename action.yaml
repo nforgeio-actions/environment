@@ -51,7 +51,7 @@ runs:
 
           if (($item = $(Get-ItemProperty -Path "HKCU:\Environment" -Name $variable -ErrorAction SilentlyContinue)))
           {
-              [System.Environment]::SetEnvironmentVariable($variable, $item.$variable)
+              Write-Output "$variable=$item.$variable" >> $env:GITHUB_ENV
               return
           }
           
@@ -59,7 +59,7 @@ runs:
           
           if (($item = $(Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" -Name $variable -ErrorAction SilentlyContinue)))
           {
-              [System.Environment]::SetEnvironmentVariable($variable, $item.$variable)
+              Write-Output "$variable=$item.$variable" >> $env:GITHUB_ENV
               return
           }
           else
@@ -71,7 +71,7 @@ runs:
       # COMPUTERNAME is a special case
       
       $computername = [System.Net.Dns]::GetHostName()
-      [System.Environment]::SetEnvironmentVariable("COMPUTERNAME", $computername)
+      Write-Output "COMPUTERNAME=$computername" >> $env:GITHUB_ENV
       
       # Load the environment variables
       
