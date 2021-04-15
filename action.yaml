@@ -34,15 +34,30 @@
 # This is a problem though for neonFORGE projects because our build scripts rely
 # on environment variables and we've configured these on our self-hosted runners.
 #
-# This action loads obtains the environment variables above directly from the
-# system/user registries or via APIs in special cases (like COMPUTERNAME) and
-# then adds these to the current job process as environment variables so they'll
-# be available to all job steps.
+# This action loads obtains the environment variables above directly via APIs and 
+# for special cases (like COMPUTERNAME) and then adds these to the current job process
+# as environment variables so they'll be available to all job steps.
 #
-# This action also sets the MASTER_PASSWORD environment variable to the 
-# [master-password] when a value is passed.  The MASTER_PASSWORD environment 
-# variable is used by the underlying Powershell deployment scripts to access the
-# current user's 1Password secrets on headless jobrunner machines.
+# This action also sets the MASTER_PASSWORD environment variable to the master-password 
+# when this is passed. The MASTER_PASSWORD environment variable is used by the underlying 
+# Powershell deployment scripts to access the current user's 1Password secrets on headless
+# jobrunner machines. We'll also load the following 1Password secrets into environment
+# variables when a master-password is passed for convenience:
+# 
+#   MASTER_PASSWORD
+# 
+#   AWS_ACCESS_KEY_ID
+#   AWS_SECRET_ACCESS_KEY
+#   DOCKER_USERNAME
+#   DOCKER_PASSWORD
+#   GITHUB_USERNAME
+#   GITHUB_PASSWORD
+#   GITHUB_PAT
+#   NEONFORGE_USERNAME
+#   NEONFORGE_PASSWORD
+#   NUGET_PUBLIC_KEY
+#   NUGET_VERSIONER_KEY
+#   NUGET_DEVFEED_KEY
 
 name: neon-environment
 description: Loads important JOBRUNNER system environment variables into the current job.
@@ -55,6 +70,21 @@ runs:
   steps:
   - shell: pwsh
     run: |
+    
+      # Verify that we're running on a properly configured neonFORGE jubrunner 
+      # and import the deployment scripts from neonCLOUD.
+      
+      # NOTE: This assumes that the [$NC_ROOT/Powershell/deployment.ps1] file
+      #       in the current clone of the repo on the runner is up-to-date
+      #       enough to be able to obtain secrets.  If this is not the case,
+      #       you'll have to manually pull the repo first on the runner.
+      
+      if (![System.IO.Directory]::Exists($env:NC_ROOT))
+      {
+          throw "neonCLOUD repo is not present on the jobrunner."
+      }
+      
+      . [System.IO.Path]::Combine($env:NC_ROOT, "Powershell", "deployment.ps1")
       
       # Loads a user or system environment variable into the current job process.
       function LoadVariable
@@ -105,12 +135,26 @@ runs:
       LoadVariable NC_TEST
       LoadVariable NC_TOOLBIN
       
-      # Set the master 1Password environment variable
+      # Set the master 1Password environment variable and
+      # load important secrets into the environment.
       
       $masterPassword = ${{ inputs.master-password }}
       
       if (![System.String]::IsNullOrEmpty($masterPassword))
       {
           [System.Environment]::SetEnvironmentVariable("MASTER_PASSWORD", $masterPassword)
+          
+          $env:AWS_ACCESS_KEY_ID     = GetSecretValue -name "AWS_ACCESS_KEY_ID[password]"     -masterPassword $masterPassword
+          $env:AWS_SECRET_ACCESS_KEY = GetSecretValue -name "AWS_SECRET_ACCESS_KEY[password]" -masterPassword $masterPassword
+          $env:DOCKER_USERNAME       = GetSecretValue -name "DOCKER_LOGIN[username]"          -masterPassword $masterPassword
+          $env:DOCKER_PASSWORD       = GetSecretValue -name "DOCKER_LOGIN[password]"          -masterPassword $masterPassword
+          $env:GITHUB_USERNAME       = GetSecretValue -name "GITHUB_LOGIN[username]"          -masterPassword $masterPassword
+          $env:GITHUB_PASSWORD       = GetSecretValue -name "GITHUB_LOGIN[password]"          -masterPassword $masterPassword
+          $env:GITHUB_PAT            = GetSecretValue -name "GITHUB_PAT[password]"            -masterPassword $masterPassword
+          $env:NEONFORGE_USERNAME    = GetSecretValue -name "NEONFORGE_LOGIN[username]"       -masterPassword $masterPassword
+          $env:NEONFORGE_PASSWORD    = GetSecretValue -name "NEONFORGE_LOGIN[password]"       -masterPassword $masterPassword
+          $env:NUGET_PUBLIC_KEY      = GetSecretValue -name "NUGET_PUBLIC_KEY[password]"      -masterPassword $masterPassword
+          $env:NUGET_VERSIONER_KEY   = GetSecretValue -name "NUGET_VERSIONER_KEY[password]"   -masterPassword $masterPassword
+          $env:NUGET_DEVFEED_KEY     = GetSecretValue -name "NUGET_DEVFEED_KEY[password]"     -masterPassword $masterPassword          
       }
       
