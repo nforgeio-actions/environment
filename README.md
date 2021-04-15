@@ -37,15 +37,32 @@ from taking depedencies on the hosting environment.
 This is a problem though for neonFORGE projects because our build scripts rely
 on environment variables and we've configured these on our self-hosted runners.
 
-This action loads obtains the environment variables above directly from the
-system/user registries or via APIs in special cases (like COMPUTERNAME) and
-then adds these to the current job process as environment variables so they'll
-be available to all job steps.
+This action loads obtains the environment variables above directly via APIs and
+for special cases (like COMPUTERNAME) and then adds these to the current job process
+as environment variables so they'll be available to all job steps.
 
 This action also sets the MASTER_PASSWORD environment variable to the 
-**master-password** when this is passed.  The MASTER_PASSWORD environment 
+master-password when this is passed.  The MASTER_PASSWORD environment 
 variable is used by the underlying Powershell deployment scripts to access the
-current user's 1Password secrets on headless jobrunner machines.
+current user's 1Password secrets on headless jobrunner machines.  We'll
+also load the following 1Password secrets into environment variables when
+a master-password is passed for convenience:
+```
+MASTER_PASSWORD
+
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
+DOCKER_USERNAME
+DOCKER_PASSWORD
+GITHUB_USERNAME
+GITHUB_PASSWORD
+GITHUB_PAT
+NEONFORGE_USERNAME
+NEONFORGE_PASSWORD
+NUGET_PUBLIC_KEY
+NUGET_VERSIONER_KEY
+NUGET_DEVFEED_KEY
+```
 
 ## Examples
 
