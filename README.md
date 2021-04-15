@@ -43,7 +43,7 @@ then adds these to the current job process as environment variables so they'll
 be available to all job steps.
 
 This action also sets the MASTER_PASSWORD environment variable to the 
-**master-password** when a value is passed.  The MASTER_PASSWORD environment 
+**master-password** when this is passed.  The MASTER_PASSWORD environment 
 variable is used by the underlying Powershell deployment scripts to access the
 current user's 1Password secrets on headless jobrunner machines.
 
@@ -59,5 +59,5 @@ current user's 1Password secrets on headless jobrunner machines.
 ```
 - uses: nforgeio-actions/neon-environment
   with:
-    master-password: ${{ env:DEVBOT_MASTER_PASSWORD }}
+    master-password: ${{ secrets.DEVBOT_MASTER_PASSWORD }}
 ```
