@@ -1,6 +1,6 @@
 #------------------------------------------------------------------------------
 # Loads the values of important JOBRUNNER system environment variables into the
-# current job as well as the process environment.  Here's the list of variables
+# current job as well as to the process environment.  Here's the list of variables
 # we're currently loading:
 #
 #   COMPUTERNAME
