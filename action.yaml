@@ -136,7 +136,7 @@ runs:
       LoadVariable NC_TOOLBIN
       
       # Set the master 1Password environment variable and
-      # load important secrets into the environment.
+      # load important secrets into the process environment.
       
       $masterPassword = ${{ inputs.master-password }}
       
