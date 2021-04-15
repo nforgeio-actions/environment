@@ -45,8 +45,8 @@ This action also sets the MASTER_PASSWORD environment variable to the
 master-password when this is passed.  The MASTER_PASSWORD environment 
 variable is used by the underlying Powershell deployment scripts to access the
 current user's 1Password secrets on headless jobrunner machines.  We'll
-also load the following 1Password secrets into environment variables when
-a master-password is passed for convenience:
+also load the following 1Password secrets into process environment variables
+when a master-password is passed for convenience:
 ```
 MASTER_PASSWORD
 
