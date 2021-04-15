@@ -84,7 +84,9 @@ runs:
           throw "neonCLOUD repo is not present on the jobrunner."
       }
       
-      . [System.IO.Path]::Combine($env:NC_ROOT, "Powershell", "deployment.ps1")
+      $deploymentFile = [System.IO.Path]::Combine($env:NC_ROOT, "Powershell", "deployment.ps1")
+      
+      . $deploymentFile
       
       # Loads a user or system environment variable into the current job process.
       function LoadVariable
