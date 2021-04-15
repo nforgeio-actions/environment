@@ -1,6 +1,6 @@
 #------------------------------------------------------------------------------
 # Loads the values of important JOBRUNNER system environment variables into the
-# current job as well as the process' environment.  Here's the list of variables
+# current job as well as the process environment.  Here's the list of variables
 # we're currently loading:
 #
 #   COMPUTERNAME
@@ -138,7 +138,8 @@ runs:
       LoadVariable NC_TOOLBIN
       
       # Set the master 1Password environment variable and
-      # load important secrets into the process environment.
+      # load important secrets into the process environment
+      # as well as the job environment.
       
       $masterPassword = ${{ inputs.master-password }}
       
@@ -146,17 +147,33 @@ runs:
       {
           [System.Environment]::SetEnvironmentVariable("MASTER_PASSWORD", $masterPassword)
           
-          $env:AWS_ACCESS_KEY_ID     = GetSecretValue -name "AWS_ACCESS_KEY_ID[password]"     -masterPassword $masterPassword
-          $env:AWS_SECRET_ACCESS_KEY = GetSecretValue -name "AWS_SECRET_ACCESS_KEY[password]" -masterPassword $masterPassword
-          $env:DOCKER_USERNAME       = GetSecretValue -name "DOCKER_LOGIN[username]"          -masterPassword $masterPassword
-          $env:DOCKER_PASSWORD       = GetSecretValue -name "DOCKER_LOGIN[password]"          -masterPassword $masterPassword
-          $env:GITHUB_USERNAME       = GetSecretValue -name "GITHUB_LOGIN[username]"          -masterPassword $masterPassword
-          $env:GITHUB_PASSWORD       = GetSecretValue -name "GITHUB_LOGIN[password]"          -masterPassword $masterPassword
-          $env:GITHUB_PAT            = GetSecretValue -name "GITHUB_PAT[password]"            -masterPassword $masterPassword
-          $env:NEONFORGE_USERNAME    = GetSecretValue -name "NEONFORGE_LOGIN[username]"       -masterPassword $masterPassword
-          $env:NEONFORGE_PASSWORD    = GetSecretValue -name "NEONFORGE_LOGIN[password]"       -masterPassword $masterPassword
-          $env:NUGET_PUBLIC_KEY      = GetSecretValue -name "NUGET_PUBLIC_KEY[password]"      -masterPassword $masterPassword
-          $env:NUGET_VERSIONER_KEY   = GetSecretValue -name "NUGET_VERSIONER_KEY[password]"   -masterPassword $masterPassword
-          $env:NUGET_DEVFEED_KEY     = GetSecretValue -name "NUGET_DEVFEED_KEY[password]"     -masterPassword $masterPassword          
+          function LoadSecret
+          {
+              [CmdletBinding()]
+              param (
+                  [Parameter(Position=0, Mandatory=1)]
+                  [string]$variable,
+                  [Parameter(Position=1, Mandatory=1)]
+                  [string]$secretName,
+              )
+              
+              $value = GetSecretValue -name $secretName -masterPassword $masterPassword
+              
+              [System.Environment]::SetEnvironmentVariable($variable, $value)
+              Write-Output "$variable=$value" >> $env:GITHUB_ENV
+          }
+          
+          LoadSecret "AWS_ACCESS_KEY_ID"     "AWS_ACCESS_KEY_ID[password]"
+          LoadSecret "AWS_SECRET_ACCESS_KEY" "AWS_SECRET_ACCESS_KEY[password]"
+          LoadSecret "DOCKER_USERNAME"       "DOCKER_LOGIN[username]"
+          LoadSecret "DOCKER_PASSWORD"       "DOCKER_LOGIN[password]"
+          LoadSecret "GITHUB_USERNAME"       "GITHUB_LOGIN[username]"
+          LoadSecret "GITHUB_PASSWORD"       "GITHUB_LOGIN[password]"
+          LoadSecret "GITHUB_PAT"            "GITHUB_PAT[password]"
+          LoadSecret "NEONFORGE_USERNAME"    "NEONFORGE_LOGIN[username]"
+          LoadSecret "NEONFORGE_PASSWORD"    "NEONFORGE_LOGIN[password]"
+          LoadSecret "NUGET_PUBLIC_KEY"      "NUGET_PUBLIC_KEY[password]"
+          LoadSecret "NUGET_VERSIONER_KEY"   "NUGET_VERSIONER_KEY[password]"
+          LoadSecret "NUGET_DEVFEED_KEY"     "NUGET_DEVFEED_KEY[password]"    
       }
       
