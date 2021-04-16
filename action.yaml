@@ -89,8 +89,8 @@ runs:
       
       Push-Location $ncPowershell
       
-      . deployment.ps1
-      . github.ps1
+      . ./deployment.ps1
+      . ./github.ps1
       
       Pop-Location
       
