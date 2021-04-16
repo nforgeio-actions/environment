@@ -72,7 +72,7 @@ runs:
     run: |
     
       # Verify that we're running on a properly configured neonFORGE jubrunner 
-      # and import the deployment scripts from neonCLOUD.
+      # and import the deployment and action scripts from neonCLOUD.
       
       # NOTE: This assumes that the [$NC_ROOT/Powershell/deployment.ps1] file
       #       in the current clone of the repo on the runner is up-to-date
@@ -84,9 +84,11 @@ runs:
           throw "neonCLOUD repo is not present on the jobrunner."
       }
       
-      $deploymentFile = [System.IO.Path]::Combine($env:NC_ROOT, "Powershell", "deployment.ps1")
+      $deploymentPath   = [System.IO.Path]::Combine($env:NC_ROOT, "Powershell", "deployment.ps1")
+      $githubActionPath = [System.IO.Path]::Combine($env:NC_ROOT, "Powershell", "github.ps1")
       
-      . $deploymentFile
+      . $deploymentPath
+      . $githubActionPath
       
       # Loads a user or system environment variable into the current job process.
       
