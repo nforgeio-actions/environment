@@ -79,13 +79,14 @@ runs:
       #       enough to be able to obtain secrets.  If this is not the case,
       #       you'll have to manually pull the repo first on the runner.
       
-      $ncRoot       = $env:NC_ROOT
-      $ncPowershell = [System.IO.Path]::Combine($ncRoot, "Powershell")
+      $ncRoot = $env:NC_ROOT
       
       if (![System.IO.Directory]::Exists($ncRoot))
       {
           throw "Runner Config: neonCLOUD repo is not present."
       }
+      
+      $ncPowershell = [System.IO.Path]::Combine($ncRoot, "Powershell")
       
       Push-Location $ncPowershell
       
