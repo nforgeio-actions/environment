@@ -71,7 +71,7 @@ runs:
   - shell: pwsh
     run: |
     
-      # Verify that we're running on a properly configured neonFORGE jubrunner 
+      # Verify that we're running on a properly configured neonFORGE jobrunner 
       # and import the deployment and action scripts from neonCLOUD.
       
       # NOTE: This assumes that the required [$NC_ROOT/Powershell/*.ps1] files
