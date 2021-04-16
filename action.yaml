@@ -74,10 +74,11 @@ runs:
       # Verify that we're running on a properly configured neonFORGE jubrunner 
       # and import the deployment and action scripts from neonCLOUD.
       
-      # NOTE: This assumes that the [$NC_ROOT/Powershell/deployment.ps1] file
-      #       in the current clone of the repo on the runner is up-to-date
-      #       enough to be able to obtain secrets.  If this is not the case,
-      #       you'll have to manually pull the repo first on the runner.
+      # NOTE: This assumes that the required [$NC_ROOT/Powershell/*.ps1] files
+      #       in the current clone of the repo on the runner are up-to-date
+      #       enough to be able to obtain secrets and use GitHub Action functions.
+      #       If this is not the case, you'll have to manually pull the repo 
+      #       first on the runner.
       
       $ncRoot = $env:NC_ROOT
       
