@@ -81,7 +81,7 @@ runs:
       
       if (![System.IO.Directory]::Exists($env:NC_ROOT))
       {
-          throw "neonCLOUD repo is not present on the jobrunner."
+          throw "Runner Config: neonCLOUD repo is not present."
       }
       
       $deploymentPath   = [System.IO.Path]::Combine($env:NC_ROOT, "Powershell", "deployment.ps1")
