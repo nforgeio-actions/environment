@@ -79,16 +79,19 @@ runs:
       #       enough to be able to obtain secrets.  If this is not the case,
       #       you'll have to manually pull the repo first on the runner.
       
-      if (![System.IO.Directory]::Exists($env:NC_ROOT))
+      $ncRoot = $env:NC_ROOT
+      
+      if (![System.IO.Directory]::Exists($ncRoot))
       {
           throw "Runner Config: neonCLOUD repo is not present."
       }
       
-      $deploymentPath   = [System.IO.Path]::Combine($env:NC_ROOT, "Powershell", "deployment.ps1")
-      $githubActionPath = [System.IO.Path]::Combine($env:NC_ROOT, "Powershell", "github.ps1")
+      Push-Location [System.IO.Path]::Combine($ncRoot, "Powershell")
       
-      . $deploymentPath
-      . $githubActionPath
+      . deployment.ps1
+      . github.ps1
+      
+      Pop-Location
       
       # Loads a user or system environment variable into the current job process.
       
