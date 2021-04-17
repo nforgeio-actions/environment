@@ -110,7 +110,7 @@ runs:
              throw "The [$variable] environment variable does not exist."
           }
           
-          Set-ActionEnvironmentVariable $variable $value"
+          Set-ActionEnvironmentVariable $variable $value
       }
       
       # COMPUTERNAME is a special case
@@ -169,7 +169,20 @@ runs:
               $value = GetSecretValue -name $secretName -masterPassword $masterPassword
               
               [System.Environment]::SetEnvironmentVariable($variable, $value)
-              Set-ActionEnvironmentVariable "$variable $value"
+              Set-ActionEnvironmentVariable $variable $value
           }
+          
+          LoadSecret "AWS_ACCESS_KEY_ID"     "AWS_ACCESS_KEY_ID[password]"
+          LoadSecret "AWS_SECRET_ACCESS_KEY" "AWS_SECRET_ACCESS_KEY[password]"
+          LoadSecret "DOCKER_USERNAME"       "DOCKER_LOGIN[username]"
+          LoadSecret "DOCKER_PASSWORD"       "DOCKER_LOGIN[password]"
+          LoadSecret "GITHUB_USERNAME"       "GITHUB_LOGIN[username]"
+          LoadSecret "GITHUB_PASSWORD"       "GITHUB_LOGIN[password]"
+          LoadSecret "GITHUB_PAT"            "GITHUB_PAT[password]"
+          LoadSecret "NEONFORGE_USERNAME"    "NEONFORGE_LOGIN[username]"
+          LoadSecret "NEONFORGE_PASSWORD"    "NEONFORGE_LOGIN[password]"
+          LoadSecret "NUGET_PUBLIC_KEY"      "NUGET_PUBLIC_KEY[password]"
+          LoadSecret "NUGET_VERSIONER_KEY"   "NUGET_VERSIONER_KEY[password]"
+          LoadSecret "NUGET_DEVFEED_KEY"     "NUGET_DEVFEED_KEY[password]"
       }
       
