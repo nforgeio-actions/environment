@@ -113,7 +113,7 @@ runs:
              throw "The [$variable] environment variable does not exist."
           }
           
-          Write-Output "$variable=$value" >> $env:GITHUB_ENV
+          Set-ActionEnvironmentVariable $variable $value"
       }
       
       # COMPUTERNAME is a special case
