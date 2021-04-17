@@ -93,7 +93,7 @@ runs:
       . ./includes.ps1
       Pop-Location
       
-      # Loads a user or system environment variable into the current job process.
+      # Loads an environment variable into the current job environment.
       
       function LoadVariable
       {
@@ -116,7 +116,7 @@ runs:
       # COMPUTERNAME is a special case
       
       $computername = [System.Net.Dns]::GetHostName()
-      Write-Output "COMPUTERNAME=$computername" >> $env:GITHUB_ENV
+      Set-ActionEnvironmentVariable "COMPUTERNAME" $computername
       
       # Load the environment variables
       
@@ -169,7 +169,7 @@ runs:
               $value = GetSecretValue -name $secretName -masterPassword $masterPassword
               
               [System.Environment]::SetEnvironmentVariable($variable, $value)
-              Write-Output "$variable=$value" >> $env:GITHUB_ENV
+              Set-ActionEnvironmentVariable "$variable $value"
           }
           
           LoadSecret "AWS_ACCESS_KEY_ID"     "AWS_ACCESS_KEY_ID[password]"
@@ -183,6 +183,6 @@ runs:
           LoadSecret "NEONFORGE_PASSWORD"    "NEONFORGE_LOGIN[password]"
           LoadSecret "NUGET_PUBLIC_KEY"      "NUGET_PUBLIC_KEY[password]"
           LoadSecret "NUGET_VERSIONER_KEY"   "NUGET_VERSIONER_KEY[password]"
-          # LoadSecret "NUGET_DEVFEED_KEY"     "NUGET_DEVFEED_KEY[password]"
+          LoadSecret "NUGET_DEVFEED_KEY"     "NUGET_DEVFEED_KEY[password]"
       }
       
