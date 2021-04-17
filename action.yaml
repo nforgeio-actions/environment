@@ -60,10 +60,10 @@
 #   NUGET_DEVFEED_KEY
 
 name: neon-environment
-description: Loads important JOBRUNNER system environment variables into the current job.
+description: "Loads important JOBRUNNER system environment variables into the current job"
 inputs:
   master-password:
-    description: Specifies master 1Password to override [secrets.DEVBOT_MASTER_PASSWORD].
+    description: "Specifies master 1Password to override [secrets.DEVBOT_MASTER_PASSWORD]"
     required: false
 runs:
   using: composite
