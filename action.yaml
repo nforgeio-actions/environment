@@ -93,6 +93,11 @@ runs:
       . ./includes.ps1
       Pop-Location
       
+      # $debug(jefflill): DELETE THIS!
+      
+      Write-ActionOutput "`u{001b}[31mTHIS SHOULD BE RED`u{001b}[0m"
+      Write-ActionOutput "`u{001b}[33mTHIS SHOULD BE YELLOW`u{001b}[0m"
+      
       # Loads an environment variable into the current job environment.
       
       function LoadVariable
