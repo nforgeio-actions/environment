@@ -169,6 +169,8 @@ runs:
               
               $value = GetSecretValue -name $secretName -masterPassword $masterPassword -nullOnNotFound $false
               
+              Write-Output "$secretName = $value"
+              
               if (![System.String]::IsNullOrEmpty($value))
               {
                   [System.Environment]::SetEnvironmentVariable($variable, $value)
