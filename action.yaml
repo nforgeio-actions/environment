@@ -167,7 +167,7 @@ runs:
                   [string]$secretName
               )
               
-              $value = GetSecretValue -name $secretName -masterPassword $masterPassword -nullOnNotFound $true
+              $value = GetSecretValue -name $secretName -masterPassword $masterPassword -nullOnNotFound $false
               
               if (![System.String]::IsNullOrEmpty($value))
               {
