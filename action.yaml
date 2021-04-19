@@ -148,7 +148,7 @@ runs:
       # load important secrets into the process environment
       # as well as the job environment.
       
-      $masterPassword = ${{ inputs.master-password }}
+      $masterPassword = ${{ secrets.master-password }}
       
       if (![System.String]::IsNullOrEmpty($masterPassword))
       {
