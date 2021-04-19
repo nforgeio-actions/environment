@@ -60,7 +60,7 @@
 #   NUGET_DEVFEED_KEY
 #   TEAM_DEVOPS_CHANNEL
 
-name: neon-environment
+name: environment
 description: "Loads important JOBRUNNER system environment variables into the current job"
 inputs:
   master-password:
