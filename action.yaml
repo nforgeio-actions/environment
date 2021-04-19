@@ -167,10 +167,13 @@ runs:
                   [string]$secretName
               )
               
-              $value = GetSecretValue -name $secretName -masterPassword $masterPassword
+              $value = GetSecretValue -name $secretName -masterPassword $masterPassword -nullOnNotFound $true
               
-              [System.Environment]::SetEnvironmentVariable($variable, $value)
-              Set-ActionEnvironmentVariable $variable $value
+              if (![System.String]::IsNullOrEmpty($value))
+              {
+                  [System.Environment]::SetEnvironmentVariable($variable, $value)
+                  Set-ActionEnvironmentVariable $variable $value
+              }
           }
           
           LoadSecret "AWS_ACCESS_KEY_ID"     "AWS_ACCESS_KEY_ID[password]"
