@@ -64,7 +64,7 @@ name: environment
 description: "Loads important JOBRUNNER system environment variables into the current job"
 inputs:
   master-password:
-    description: "Optionally specifies the master 1Password (typically for DEVBOT)"
+    description: "Optionally specifies the master 1Password to override the MASTER_PASSWORD environment variable"
     required: false
 runs:
   using: composite
@@ -149,6 +149,11 @@ runs:
       # secrets into the process environment and job environments.
       
       $masterPassword = "${{ inputs.master-password }}"
+      
+      if ([System.String]::IsNullOrEmpty($masterPassword))
+      {
+          $masterPassword = $env:MASTER_PASSWORD
+      }
       
       if (![System.String]::IsNullOrEmpty($masterPassword))
       {
