@@ -41,8 +41,8 @@ This action loads obtains the environment variables above directly via APIs and
 for special cases (like COMPUTERNAME) and then adds these to the current job process
 as environment variables so they'll be available to all job steps.
 
-This action also sets the MASTER_PASSWORD environment variable to the 
-master-password when this is passed.  The MASTER_PASSWORD environment 
+This action also sets the **MASTER_PASSWORD** environment variable to the 
+**master-password** when this is passed.  The MASTER_PASSWORD environment 
 variable is used by the underlying Powershell deployment scripts to access the
 current user's 1Password secrets on headless jobrunner machines.  We'll
 also load the following 1Password secrets into process environment variables
@@ -62,6 +62,7 @@ NEONFORGE_PASSWORD
 NUGET_PUBLIC_KEY
 NUGET_VERSIONER_KEY
 NUGET_DEVFEED_KEY
+MS_TEAMS_WEBHOOK_URI
 ```
 
 ## Examples
