@@ -144,11 +144,11 @@ runs:
       LoadVariable NC_TEST
       LoadVariable NC_TOOLBIN
       
-      # When the action had access to the master 1Password, persist the password
+      # When the action had access to DEVBOT's master 1Password, persist the password
       # to the MASTER-PASSWORD environment variable and also load useful common 
       # secrets into the process environment and job environments.
       
-      $masterPassword = "${{ secrets.master-password }}"
+      $masterPassword = "${{ secrets.DEVBOT_MASTER_PASSWORD }}"
       
       if (![System.String]::IsNullOrEmpty($masterPassword))
       {
