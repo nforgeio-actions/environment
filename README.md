@@ -3,7 +3,7 @@
 **INTERNAL USE ONLY:** This GitHub action is not intended for general use.  The only reason why this repo is public is because GitHub requires it.
 
 Loads the values of important JOBRUNNER system environment variables into the
-current job as well as to the process' environment.  Here's the list of variables
+current job as well as to the process environment.  Here's the list of variables
 we're currently loading:
 ```
 COMPUTERNAME
