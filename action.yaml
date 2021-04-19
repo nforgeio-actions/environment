@@ -58,6 +58,7 @@
 #   NUGET_PUBLIC_KEY
 #   NUGET_VERSIONER_KEY
 #   NUGET_DEVFEED_KEY
+#   TEAMS_DEVOPS_CHANNEL
 
 name: neon-environment
 description: "Loads important JOBRUNNER system environment variables into the current job"
@@ -187,5 +188,6 @@ runs:
           LoadSecret "NUGET_PUBLIC_KEY"      "NUGET_PUBLIC_KEY[password]"
           LoadSecret "NUGET_VERSIONER_KEY"   "NUGET_VERSIONER_KEY[password]"
           LoadSecret "NUGET_DEVFEED_KEY"     "NUGET_DEVFEED_KEY[password]"
+          LoadSecret "TEAMS_DEVOPS_CHANNEL"  "TEAMS_DEVOPS_CHANNEL[value]"
       }
       
