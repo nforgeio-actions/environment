@@ -108,7 +108,7 @@ runs:
           
           if ([System.String]::IsNullOrEmpty($value))
           {
-             throw "The [$variable] environment variable does not exist."
+              throw "The [$variable] environment variable does not exist."
           }
           
           Set-ActionEnvironmentVariable $variable $value
@@ -144,18 +144,18 @@ runs:
       LoadVariable NC_TEST
       LoadVariable NC_TOOLBIN
       
-      # Set the master 1Password environment variable and
-      # load important secrets into the process environment
-      # as well as the job environment.
+      # When the action had access to the master 1Password, persist the password
+      # to the MASTER-PASSWORD environment variable and also load useful common 
+      # secrets into the process environment and job environments.
       
-      $masterPassword = ${{ secrets.master-password }}
+      $masterPassword = "${{ secrets.master-password }}"
       
       if (![System.String]::IsNullOrEmpty($masterPassword))
       {
           [System.Environment]::SetEnvironmentVariable("MASTER_PASSWORD", $masterPassword)
           
           # Reads a 1Password secret and adds it to the process and
-          # job environment variables.
+          # job environments.
           
           function LoadSecret
           {
