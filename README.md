@@ -69,13 +69,13 @@ TEAMS_DEVOPS_CHANNEL
 
 **Load the system environment variables (without master password):**
 ```
-- uses: nforgeio-actions/neon-environment
+- uses: nforgeio-actions/environment
 ```
 
 
 **Load the system environment variables (with master password):**
 ```
-- uses: nforgeio-actions/neon-environment
+- uses: nforgeio-actions/environment
   with:
     master-password: ${{ secrets.DEVBOT_MASTER_PASSWORD }}
 ```
