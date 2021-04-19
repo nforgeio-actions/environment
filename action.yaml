@@ -148,7 +148,7 @@ runs:
       # to the MASTER-PASSWORD environment variable and also load useful common 
       # secrets into the process environment and job environments.
       
-      $masterPassword = "${{ secrets:DEVBOT_MASTER_PASSWORD }}"
+      $masterPassword = "${{ secrets.DEVBOT_MASTER_PASSWORD }}"
       
       if (![System.String]::IsNullOrEmpty($masterPassword))
       {
