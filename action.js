@@ -14,6 +14,8 @@
 
 const process = require("child_process");
 
+console.log(process)
+
 process.exec("pwsh -file action.ps1", 
   function(error, stdout, stderr) {
   
