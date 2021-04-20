@@ -88,17 +88,18 @@ LoadVariable NC_TEST
 LoadVariable NC_TOOLBIN
 Write-Output "********: 4"
 
-# When the action had access to DEVBOT's master 1Password, persist the password
+# When the action has access to DEVBOT's master 1Password, persist the password
 # to the MASTER-PASSWORD environment variable and also load useful common 
 # secrets into the process environment and job environments.
 
 $masterPassword = Get-ActionInput "master-password"
-Write-Output "********: 5"
+Write-Output "********: 5: $masterPassword"
 
 if ([System.String]::IsNullOrEmpty($masterPassword))
 {
     $masterPassword = $env:MASTER_PASSWORD
 }
+Write-Output "********: 6"
 
 if (![System.String]::IsNullOrEmpty($masterPassword))
 {
