@@ -39,14 +39,18 @@ function LoadVariable
         [string]$variable
     )
 
+Write-Output "********: A0"
     $value = [System.Environment]::GetEnvironmentVariable($variable)
+Write-Output "********: A1"
 
     if ([System.String]::IsNullOrEmpty($value))
     {
         throw "The [$variable] environment variable does not exist."
     }
 
+Write-Output "********: A2"
     Set-ActionOutput $variable $value
+Write-Output "********: A3"
 }
 
 # COMPUTERNAME is a special case
