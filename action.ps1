@@ -94,7 +94,6 @@ Write-Output "********: 4"
 
 $masterPassword = Get-ActionInput "master-password"
 Write-Output "********: 5: [$masterPassword]"
-Write-Output "********: 5A: [$masterPassword.GetType().Name]"
 
 if ([System.String]::IsNullOrEmpty($masterPassword))
 {
