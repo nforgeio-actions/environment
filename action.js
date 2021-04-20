@@ -21,5 +21,7 @@ exec("pwsh -file action.ps1",
       process.stdout.write(stdout); 
       process.stderr.write(stderr); 
 
-      core.setFailed(`Action failed with error ${err}`);
+      if (err) {
+          core.setFailed(`Action failed: ${err}`);
+      }
     });
