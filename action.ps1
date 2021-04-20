@@ -52,12 +52,16 @@ function LoadVariable
 # COMPUTERNAME is a special case
 
 $computername = [System.Net.Dns]::GetHostName()
+Write-Output "********: 0"
 Set-ActionEnvironmentVariable "COMPUTERNAME" $computername
+Write-Output "********: 1"
 Set-ActionOutput "COMPUTERNAME" $computername
+Write-Output "********: 2"
 
 # Load the environment variables
 
 LoadVariable NF_REPOS
+Write-Output "********: 3"
 LoadVariable NF_BUILD
 LoadVariable NF_CACHE
 LoadVariable NF_CODEDOC
