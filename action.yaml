@@ -113,6 +113,7 @@ outputs:
   #-------------------------------------------------------------
   MASTER_PASSWORD:
     description: "Returns the MASTER_PASSWORD secret"
+    value: ${{ inputs.master-password }}
   AWS_ACCESS_KEY_ID:
     description: "Returns the AWS_ACCESS_KEY_ID secret"
   AWS_SECRET_ACCESS_KEY:
