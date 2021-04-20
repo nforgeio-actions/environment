@@ -15,7 +15,9 @@
 const core = require('@actions/core');
 const exec = require("child_process").exec;
 
-exec("pwsh -file action.ps1", 
+console.log("CWD: ${__dirname}")
+
+exec("pwsh -File action.ps1", 
   function(err, stdout, stderr) {
   
       process.stdout.write(stdout); 
