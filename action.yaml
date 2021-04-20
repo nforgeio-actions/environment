@@ -29,8 +29,7 @@
 # This action also sets the MASTER_PASSWORD environment variable to the master-password 
 # when passed. The MASTER_PASSWORD environment variable is used by the underlying 
 # Powershell deployment scripts to access the current user's 1Password secrets on headless
-# jobrunner machines. We'll also return outputs for the following 1Password secrets for 
-# convenience:
+# jobrunner machines. We'll also return outputs for the following 1Password secrets:
 # 
 #   MASTER_PASSWORD
 # 
@@ -176,7 +175,7 @@ runs:
               throw "The [$variable] environment variable does not exist."
           }
           
-          Set-ActionEnvironmentVariable $variable $value
+          Set-ActionOutput $variable $value
       }
       
       # COMPUTERNAME is a special case
@@ -239,12 +238,10 @@ runs:
               
               $value = GetSecretValue -name $secretName -masterPassword $masterPassword -nullOnNotFound $false
               
-              Write-Output "$secretName = $value"
-              
               if (![System.String]::IsNullOrEmpty($value))
               {
                   [System.Environment]::SetEnvironmentVariable($variable, $value)
-                  Set-ActionEnvironmentVariable $variable $value
+                  Set-ActionOutput $variable $value
               }
           }
           
