@@ -12,14 +12,14 @@
 // run steps (where Powershell code can be executed directly) doesn't appear to
 // support features like action inputs/outputs.  This appears to be by-design.
 
-const process = require("child_process");
+const core = require('@actions/core');
+const exec = require("child_process").exec;
 
-console.log(process)
-
-process.exec("pwsh -file action.ps1", 
-  function(error, stdout, stderr) {
+exec("pwsh -file action.ps1", 
+  function(err, stdout, stderr) {
   
-     process.stdout.write(stdout); 
-     process.stderr.write(stderr); 
-     process.exit(error.Code);
-   });
+      process.stdout.write(stdout); 
+      process.stderr.write(stderr); 
+
+      core.setFailed(`Action failed with error ${err}`);
+    });
