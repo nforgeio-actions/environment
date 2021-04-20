@@ -93,6 +93,7 @@ Write-Output "********: 4"
 # secrets into the process environment and job environments.
 
 $masterPassword = Get-ActionInput "master-password"
+Write-Output "********: 5"
 
 if ([System.String]::IsNullOrEmpty($masterPassword))
 {
