@@ -86,6 +86,7 @@ LoadVariable NC_ROOT
 LoadVariable NC_TEMP
 LoadVariable NC_TEST
 LoadVariable NC_TOOLBIN
+Write-Output "********: 4"
 
 # When the action had access to DEVBOT's master 1Password, persist the password
 # to the MASTER-PASSWORD environment variable and also load useful common 
