@@ -20,8 +20,7 @@ const exec = require("child_process").exec;
 
 process.chdir(__dirname);
 
-console.log(`CWD: ${process.cwd()}`)
-console.log(process.env)
+// Launch the Powershell script.
 
 exec("pwsh -File action.ps1", 
   function(err, stdout, stderr) {

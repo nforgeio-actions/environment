@@ -83,7 +83,7 @@ LoadVariable NC_TOOLBIN
 # to the MASTER-PASSWORD environment variable and also load useful common 
 # secrets into the process environment and job environments.
 
-$masterPassword = "${{ inputs.master-password }}"
+$masterPassword = Get-ActionInput "master-password"
 
 if ([System.String]::IsNullOrEmpty($masterPassword))
 {
