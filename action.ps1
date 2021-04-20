@@ -98,9 +98,10 @@ Write-Output "********: 5A: [$masterPassword.GetType().Name]"
 
 if ([System.String]::IsNullOrEmpty($masterPassword))
 {
+Write-Output "********: 6A IS-NULL"
     $masterPassword = $env:MASTER_PASSWORD
 }
-Write-Output "********: 6"
+Write-Output "********: 6B"
 
 if (![System.String]::IsNullOrEmpty($masterPassword))
 {
