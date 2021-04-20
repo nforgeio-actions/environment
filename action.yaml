@@ -141,6 +141,7 @@ outputs:
   TEAM_DEVOPS_CHANNEL:
     description: "Returns the TEAM_DEVOPS_CHANNEL secret"
 runs:
+  using: composite
   steps:
   - shell: pwsh
     run: |
