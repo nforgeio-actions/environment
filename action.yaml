@@ -179,6 +179,8 @@ runs:
           
           $value = [System.Environment]::GetEnvironmentVariable($variable)
           
+          Write-Output "ENV: $variable = $value"
+          
           if ([System.String]::IsNullOrEmpty($value))
           {
               throw "The [$variable] environment variable does not exist."
@@ -246,6 +248,8 @@ runs:
               )
               
               $value = GetSecretValue -name $secretName -masterPassword $masterPassword -nullOnNotFound $false
+              
+              Write-Output "SECRET: $variable = $value"
               
               if (![System.String]::IsNullOrEmpty($value))
               {
