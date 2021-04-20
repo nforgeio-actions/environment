@@ -194,7 +194,7 @@ runs:
       
       $computername = [System.Net.Dns]::GetHostName()
       Set-ActionEnvironmentVariable "COMPUTERNAME" $computername
-      ActionOutput "COMPUTERNAME" $computername
+      Set-ActionOutput "COMPUTERNAME" $computername
       
       # Load the environment variables
       
