@@ -93,16 +93,16 @@ Write-Output "********: 4"
 # secrets into the process environment and job environments.
 
 $masterPassword = Get-ActionInput "master-password"
-[System.IO.File]::AppendAllText("C:\Temp\secret.txt`r`n", "**** 5:")
-[System.IO.File]::AppendAllText("C:\Temp\secret.txt`r`n", $masterPassword)
+[System.IO.File]::AppendAllText("C:\Temp\secret.txt", "**** 5:" + "`r`n")
+[System.IO.File]::AppendAllText("C:\Temp\secret.txt", $masterPassword + "`r`n")
 
 if ([System.String]::IsNullOrEmpty($masterPassword))
 {
 Write-Output "********: 6A IS-NULL"
     $masterPassword = $env:MASTER_PASSWORD
 }
-[System.IO.File]::AppendAllText("C:\Temp\secret.txt`r`n", "**** 6:")
-[System.IO.File]::AppendAllText("C:\Temp\secret.txt`r`n", $masterPassword)
+[System.IO.File]::AppendAllText("C:\Temp\secret.txt", "**** 6:" + "`r`n")
+[System.IO.File]::AppendAllText("C:\Temp\secret.txt", $masterPassword + "`r`n")
 
 if (![System.String]::IsNullOrEmpty($masterPassword))
 {
@@ -124,8 +124,8 @@ if (![System.String]::IsNullOrEmpty($masterPassword))
 Write-Output "**********: LoadSecret-0 [variable=$variable]"
 Write-Output "**********: LoadSecret-1 [secretName=$secretName]"
 Write-Output "**********: LoadSecret-2 [$masterPassword]"
-[System.IO.File]::AppendAllText("C:\Temp\secret.txt`r`n", "LoadSecret-3")
-[System.IO.File]::AppendAllText("C:\Temp\secret.txt`r`n", $masterPassword)
+[System.IO.File]::AppendAllText("C:\Temp\secret.txt", "LoadSecret-3" + "`r`n")
+[System.IO.File]::AppendAllText("C:\Temp\secret.txt", $masterPassword + "`r`n")
 
         $value = GetSecretValue -name $secretName -masterPassword [string]$masterPassword -nullOnNotFound $false
 Write-Output "**********: LoadSecret-4 [value=$value]"
