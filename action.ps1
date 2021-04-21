@@ -120,8 +120,8 @@ if (![System.String]::IsNullOrEmpty($masterPassword))
             [string]$secretName
         )
 
-Write-Output "**********: LoadSecret-0"
-        $value = GetSecretValue -name $secretName masterPassword $masterPassword -nullOnNotFound $false
+Write-Output "**********: LoadSecret-0 [value=$value]"
+        $value = GetSecretValue -name $secretName -masterPassword $masterPassword -nullOnNotFound $false
 Write-Output "**********: LoadSecret-1 [value=$value]"
 
         if (![System.String]::IsNullOrEmpty($value))
