@@ -123,7 +123,7 @@ if (![System.String]::IsNullOrEmpty($masterPassword))
 Write-Output "**********: LoadSecret-0 [variable=$variable]"
 Write-Output "**********: LoadSecret-1 [secretName=$secretName]"
 Write-Output "**********: LoadSecret-2 [masterPassword=$masterPassword]"
-        $value = GetSecretValue -name $secretName -masterPassword $masterPassword -nullOnNotFound $false
+        $value = GetSecretValue -name $secretName -masterPassword [string]$masterPassword -nullOnNotFound $false
 Write-Output "**********: LoadSecret-3 [value=$value]"
 
         if (![System.String]::IsNullOrEmpty($value))
