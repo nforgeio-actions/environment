@@ -39,7 +39,7 @@ function LoadVariable
         [string]$variable
     )
 
-Write-Output "********: A0"
+Write-Output "********: A0 [$variable]"
     $value = [System.Environment]::GetEnvironmentVariable($variable)
 Write-Output "********: A1"
 
