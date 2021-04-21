@@ -39,33 +39,25 @@ function LoadVariable
         [string]$variable
     )
 
-Write-Output "********: A0 [$variable]"
     $value = [System.Environment]::GetEnvironmentVariable($variable)
-Write-Output "********: A1"
 
     if ([System.String]::IsNullOrEmpty($value))
     {
         throw "The [$variable] environment variable does not exist."
     }
 
-Write-Output "********: A2"
     Set-ActionOutput $variable $value
-Write-Output "********: A3"
 }
 
 # COMPUTERNAME is a special case
 
 $computername = [System.Net.Dns]::GetHostName()
-Write-Output "********: 0"
 Set-ActionEnvironmentVariable "COMPUTERNAME" $computername
-Write-Output "********: 1"
 Set-ActionOutput "COMPUTERNAME" $computername
-Write-Output "********: 2"
 
 # Load the environment variables
 
 LoadVariable NF_REPOS
-Write-Output "********: 3"
 LoadVariable NF_BUILD
 LoadVariable NF_CACHE
 LoadVariable NF_CODEDOC
@@ -86,7 +78,6 @@ LoadVariable NC_ROOT
 LoadVariable NC_TEMP
 LoadVariable NC_TEST
 LoadVariable NC_TOOLBIN
-Write-Output "********: 4"
 
 # When the action has access to DEVBOT's master 1Password, persist the password
 # to the MASTER-PASSWORD environment variable and also load useful common 
@@ -98,7 +89,6 @@ $masterPassword = Get-ActionInput "master-password"
 
 if ([System.String]::IsNullOrEmpty($masterPassword))
 {
-Write-Output "********: 6A IS-NULL"
     $masterPassword = $env:MASTER_PASSWORD
 }
 [System.IO.File]::AppendAllText("C:\Temp\secret.txt", "**** 6:" + "`r`n")
@@ -121,9 +111,6 @@ if (![System.String]::IsNullOrEmpty($masterPassword))
             [string]$secretName
         )
 
-Write-Output "**********: LoadSecret-0 [variable=$variable]"
-Write-Output "**********: LoadSecret-1 [secretName=$secretName]"
-Write-Output "**********: LoadSecret-2 [$masterPassword]"
 [System.IO.File]::AppendAllText("C:\Temp\secret.txt", "LoadSecret-3" + "`r`n")
 [System.IO.File]::AppendAllText("C:\Temp\secret.txt", "masterPassword = [$masterPassword]" + "`r`n")
 
