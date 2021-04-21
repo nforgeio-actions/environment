@@ -101,6 +101,7 @@ Write-Output "********: 6A IS-NULL"
     $masterPassword = $env:MASTER_PASSWORD
 }
 Write-Output "********: 6B"
+Write-Output $masterPassword
 
 if (![System.String]::IsNullOrEmpty($masterPassword))
 {
