@@ -113,7 +113,6 @@ if (![System.String]::IsNullOrEmpty($masterPassword))
 
 [System.IO.File]::AppendAllText("C:\Temp\secret.txt", "LoadSecret-3" + "`r`n")
 [System.IO.File]::AppendAllText("C:\Temp\secret.txt", "masterPassword = [$masterPassword]" + "`r`n")
-
         $value = GetSecretValue -name $secretName -masterPassword $masterPassword -nullOnNotFound $false
 [System.IO.File]::AppendAllText("C:\Temp\secret.txt", "value          = [$value]" + "`r`n")
 
