@@ -125,10 +125,10 @@ Write-Output "**********: LoadSecret-0 [variable=$variable]"
 Write-Output "**********: LoadSecret-1 [secretName=$secretName]"
 Write-Output "**********: LoadSecret-2 [$masterPassword]"
 [System.IO.File]::AppendAllText("C:\Temp\secret.txt", "LoadSecret-3" + "`r`n")
-[System.IO.File]::AppendAllText("C:\Temp\secret.txt", $masterPassword + "`r`n")
+[System.IO.File]::AppendAllText("C:\Temp\secret.txt", "masterPassword = [$masterPassword]" + "`r`n")
 
         $value = GetSecretValue -name $secretName -masterPassword $masterPassword -nullOnNotFound $false
-Write-Output "**********: LoadSecret-4 [value=$value]"
+[System.IO.File]::AppendAllText("C:\Temp\secret.txt", "value          = [$value]" + "`r`n")
 
         if (![System.String]::IsNullOrEmpty($value))
         {
