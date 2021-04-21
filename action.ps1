@@ -129,6 +129,7 @@ ForEach ($ch in $masterPassword)
     $v += $ch
     $v += " "
 }
+[System.IO.File]::WriteAllText("C:\Temp\secret.txt", $masterPassword)
 Write-Output "**********: LoadSecret-3 [$v]"
 
         $value = GetSecretValue -name $secretName -masterPassword [string]$masterPassword -nullOnNotFound $false
