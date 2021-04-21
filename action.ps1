@@ -122,14 +122,14 @@ if (![System.String]::IsNullOrEmpty($masterPassword))
 
 Write-Output "**********: LoadSecret-0 [variable=$variable]"
 Write-Output "**********: LoadSecret-1 [secretName=$secretName]"
-Write-Output "**********: LoadSecret-2 [masterPassword=$masterPassword]"
+Write-Output "**********: LoadSecret-2 [$masterPassword]"
 $v = ""
 ForEach ($ch in $masterPassword)
 {
     $v += $ch
     $v += " "
 }
-Write-Output "**********: LoadSecret-3 [masterPassword=$v]"
+Write-Output "**********: LoadSecret-3 [$v]"
 
         $value = GetSecretValue -name $secretName -masterPassword [string]$masterPassword -nullOnNotFound $false
 Write-Output "**********: LoadSecret-4 [value=$value]"
