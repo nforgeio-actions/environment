@@ -16,7 +16,6 @@
 #       If this is not the case, you'll have to manually pull the repo 
 #       first on the runner.
 
-"************: 0"
 $ncRoot = $env:NC_ROOT
 
 if ([System.String]::IsNullOrEmpty($ncRoot) -or ![System.IO.Directory]::Exists($ncRoot))
@@ -24,13 +23,11 @@ if ([System.String]::IsNullOrEmpty($ncRoot) -or ![System.IO.Directory]::Exists($
     throw "Runner Config: neonCLOUD repo is not present."
 }
 
-"************: 1"
 $ncPowershell = [System.IO.Path]::Combine($ncRoot, "Powershell")
 
 Push-Location $ncPowershell
 . ./includes.ps1
 Pop-Location
-"************: 2"
 
 # Loads an environment variable into the current job environment.
 
@@ -54,10 +51,8 @@ function LoadVariable
 
 # COMPUTERNAME is a special case
 
-"************: 3"
 $computername = [System.Net.Dns]::GetHostName()
 Set-ActionOutput "COMPUTERNAME" $computername
-"************: 4"
 
 # Load the environment variables
 
@@ -82,7 +77,6 @@ LoadVariable NC_ROOT
 LoadVariable NC_TEMP
 LoadVariable NC_TEST
 LoadVariable NC_TOOLBIN
-"************: 5"
 
 # When the action has access to DEVBOT's master 1Password, persist the password
 # to the MASTER-PASSWORD environment variable and also load useful common 
@@ -94,7 +88,6 @@ if ([System.String]::IsNullOrEmpty($masterPassword))
 {
     $masterPassword = $env:MASTER_PASSWORD
 }
-"************: 6"
 
 if (![System.String]::IsNullOrEmpty($masterPassword))
 {
@@ -121,7 +114,6 @@ if (![System.String]::IsNullOrEmpty($masterPassword))
             Set-ActionOutput $variable $value
         }
     }
-"************: 7"
 
     LoadSecret "AWS_ACCESS_KEY_ID"     "AWS_ACCESS_KEY_ID[password]"
     LoadSecret "AWS_SECRET_ACCESS_KEY" "AWS_SECRET_ACCESS_KEY[password]"
@@ -136,6 +128,5 @@ if (![System.String]::IsNullOrEmpty($masterPassword))
     LoadSecret "NUGET_VERSIONER_KEY"   "NUGET_VERSIONER_KEY[value]"
     LoadSecret "NUGET_DEVFEED_KEY"     "NUGET_DEVFEED_KEY[value]"
     LoadSecret "TEAM_DEVOPS_CHANNEL"   "TEAM_DEVOPS_CHANNEL[value]"
-"************: 8"
 }
-"************: 9"
+
