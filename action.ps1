@@ -84,15 +84,11 @@ LoadVariable NC_TOOLBIN
 # secrets into the process environment and job environments.
 
 $masterPassword = Get-ActionInput "master-password"
-[System.IO.File]::AppendAllText("C:\Temp\secret.txt", "**** 5:" + "`r`n")
-[System.IO.File]::AppendAllText("C:\Temp\secret.txt", $masterPassword + "`r`n")
 
 if ([System.String]::IsNullOrEmpty($masterPassword))
 {
     $masterPassword = $env:MASTER_PASSWORD
 }
-[System.IO.File]::AppendAllText("C:\Temp\secret.txt", "**** 6:" + "`r`n")
-[System.IO.File]::AppendAllText("C:\Temp\secret.txt", $masterPassword + "`r`n")
 
 if (![System.String]::IsNullOrEmpty($masterPassword))
 {
@@ -111,10 +107,7 @@ if (![System.String]::IsNullOrEmpty($masterPassword))
             [string]$secretName
         )
 
-[System.IO.File]::AppendAllText("C:\Temp\secret.txt", "LoadSecret-3" + "`r`n")
-[System.IO.File]::AppendAllText("C:\Temp\secret.txt", "masterPassword = [$masterPassword]" + "`r`n")
         $value = GetSecretValue -name $secretName -masterPassword $masterPassword -nullOnNotFound $false
-[System.IO.File]::AppendAllText("C:\Temp\secret.txt", "value          = [$value]" + "`r`n")
 
         if (![System.String]::IsNullOrEmpty($value))
         {
