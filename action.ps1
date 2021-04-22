@@ -52,7 +52,6 @@ function LoadVariable
 # COMPUTERNAME is a special case
 
 $computername = [System.Net.Dns]::GetHostName()
-Set-ActionEnvironmentVariable "COMPUTERNAME" $computername
 Set-ActionOutput "COMPUTERNAME" $computername
 
 # Load the environment variables
