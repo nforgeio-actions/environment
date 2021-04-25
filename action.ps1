@@ -35,7 +35,7 @@ function LoadVariable
 {
     [CmdletBinding()]
     param (
-        [Parameter(Position=0, Mandatory=1)]
+        [Parameter(Position=0, Mandatory=$true)]
         [string]$variable
     )
 
@@ -100,9 +100,9 @@ if (![System.String]::IsNullOrEmpty($masterPassword))
     {
         [CmdletBinding()]
         param (
-            [Parameter(Position=0, Mandatory=1)]
+            [Parameter(Position=0, Mandatory=$true)]
             [string]$variable,
-            [Parameter(Position=1, Mandatory=1)]
+            [Parameter(Position=1, Mandatory=$true)]
             [string]$secretName
         )
 
