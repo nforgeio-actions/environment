@@ -106,7 +106,7 @@ if (![System.String]::IsNullOrEmpty($masterPassword))
             [string]$secretName
         )
 
-        $value = GetSecretValue -name $secretName -masterPassword $masterPassword -nullOnNotFound $false
+        $value = Get-SecretValue -name $secretName -masterPassword $masterPassword -nullOnNotFound $false
 
         if (![System.String]::IsNullOrEmpty($value))
         {
