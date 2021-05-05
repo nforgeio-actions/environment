@@ -29,12 +29,6 @@ Push-Location $ncPowershell
 . ./includes.ps1
 Pop-Location
 
-#-------------------------------
-# $debug(jefflill): DELETE THIS!
-
-dir env: > C:\Temp\env.txt
-#-------------------------------
-
 # Loads an environment variable into the current job environment.
 
 function LoadVariable
