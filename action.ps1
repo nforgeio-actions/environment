@@ -128,6 +128,5 @@ if (![System.String]::IsNullOrEmpty($masterPassword))
     LoadSecret "NUGET_PUBLIC_KEY"      "NUGET_PUBLIC_KEY[password]"
     LoadSecret "NUGET_VERSIONER_KEY"   "NUGET_VERSIONER_KEY[value]"
     LoadSecret "NUGET_DEVFEED_KEY"     "NUGET_DEVFEED_KEY[value]"
-    LoadSecret "TEAM_DEVOPS_CHANNEL"   "TEAM_DEVOPS_CHANNEL[value]"
+    LoadSecret "TEAM_DEVBOT_CHANNEL"   "TEAM_DEVBOT_CHANNEL[value]"
 }
-

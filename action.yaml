@@ -54,7 +54,7 @@
 #   NUGET_PUBLIC_KEY
 #   NUGET_VERSIONER_KEY
 #   NUGET_DEVFEED_KEY
-#   TEAM_DEVOPS_CHANNEL
+#   TEAM_DEVBOT_CHANNEL
 
 name: environment
 description: "Loads important JOBRUNNER system environment variables into the current job"
@@ -137,8 +137,8 @@ outputs:
     description: "Returns the NUGET_VERSIONER_KEY secret"
   NUGET_DEVFEED_KEY:
     description: "Returns the NUGET_DEVFEED_KEY secret"
-  TEAM_DEVOPS_CHANNEL:
-    description: "Returns the TEAM_DEVOPS_CHANNEL secret"
+  TEAM_DEVBOT_CHANNEL:
+    description: "Returns the TEAM_DEVBOT_CHANNEL secret"
 runs:
   using: node12
   main: action.js
