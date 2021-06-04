@@ -116,6 +116,8 @@ if (![System.String]::IsNullOrEmpty($masterPassword))
         }
     }
 
+    # Personal secrets
+
     LoadSecret "AWS_ACCESS_KEY_ID"     "AWS_ACCESS_KEY_ID[password]"
     LoadSecret "AWS_SECRET_ACCESS_KEY" "AWS_SECRET_ACCESS_KEY[password]"
     LoadSecret "DOCKER_USERNAME"       "DOCKER_LOGIN[username]"
@@ -126,7 +128,10 @@ if (![System.String]::IsNullOrEmpty($masterPassword))
     LoadSecret "NEONFORGE_USERNAME"    "NEONFORGE_LOGIN[username]"
     LoadSecret "NEONFORGE_PASSWORD"    "NEONFORGE_LOGIN[password]"
     LoadSecret "NUGET_PUBLIC_KEY"      "NUGET_PUBLIC_KEY[password]"
-    LoadSecret "NUGET_VERSIONER_KEY"   "NUGET_VERSIONER_KEY[value]"
-    LoadSecret "NUGET_DEVFEED_KEY"     "NUGET_DEVFEED_KEY[value]"
     LoadSecret "TEAM_DEVBOT_CHANNEL"   "TEAM_DEVBOT_CHANNEL[value]"
+
+    # Shared secrets
+
+    LoadSecret "NUGET_VERSIONER_KEY"   "NUGET_VERSIONER_KEY[value]" "group-devops"
+    LoadSecret "NUGET_DEVFEED_KEY"     "NUGET_DEVFEED_KEY[value]"   "group-devops"
 }
