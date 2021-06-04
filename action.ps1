@@ -109,7 +109,14 @@ if (![System.String]::IsNullOrEmpty($masterPassword))
             [string]$vault = $null
         )
 
-        $value = Get-SecretValue -name $secretName -masterPassword $masterPassword -nullOnNotFound $false
+        if ([System.String]::IsNullOrEmpty($vault))
+        {
+            $value = Get-SecretValue -name $secretName -masterPassword $masterPassword -nullOnNotFound $false
+        }
+        else
+        {
+            $value = Get-SecretValue -name $secretName -vault $vault -masterPassword $masterPassword -nullOnNotFound $false
+        }
 
         if (![System.String]::IsNullOrEmpty($value))
         {
@@ -134,6 +141,6 @@ if (![System.String]::IsNullOrEmpty($masterPassword))
 
     # Shared secrets
 
-    LoadSecret "NUGET_VERSIONER_KEY"   "NUGET_VERSIONER_KEY[value]" "group-devops"
-    LoadSecret "NUGET_DEVFEED_KEY"     "NUGET_DEVFEED_KEY[value]"   "group-devops"
+    LoadSecret "NUGET_VERSIONER_KEY"  "NUGET_VERSIONER_KEY[value]" "group-devops"
+    LoadSecret "NUGET_DEVFEED_KEY"    "NUGET_DEVFEED_KEY[value]"   "group-devops"
 }
