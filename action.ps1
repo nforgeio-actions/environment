@@ -104,7 +104,9 @@ if (![System.String]::IsNullOrEmpty($masterPassword))
             [Parameter(Position=0, Mandatory=$true)]
             [string]$variable,
             [Parameter(Position=1, Mandatory=$true)]
-            [string]$secretName
+            [string]$secretName,
+            [Parameter(Position=1, Mandatory=$true)]
+            [string]$vault = $null
         )
 
         $value = Get-SecretValue -name $secretName -masterPassword $masterPassword -nullOnNotFound $false
