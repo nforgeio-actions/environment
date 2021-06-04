@@ -105,7 +105,7 @@ if (![System.String]::IsNullOrEmpty($masterPassword))
             [string]$variable,
             [Parameter(Position=1, Mandatory=$true)]
             [string]$secretName,
-            [Parameter(Position=1, Mandatory=$true)]
+            [Parameter(Position=1, Mandatory=$false)]
             [string]$vault = $null
         )
 
