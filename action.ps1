@@ -109,8 +109,8 @@ if (![System.String]::IsNullOrEmpty($masterPassword))
             [string]$vault = $null
         )
 
-Log-DebugLine "*** 0: name  = $name"
-Log-DebugLine "*** 0: vault = $vault"
+Log-DebugLine "*** 0: variable = $variable"
+Log-DebugLine "*** 0: vault    = $vault"
 
         if ([System.String]::IsNullOrEmpty($vault))
         {
