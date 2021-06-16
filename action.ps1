@@ -126,7 +126,7 @@ Log-DebugLine "*** 3: value = $value"
 
         if (![System.String]::IsNullOrEmpty($value))
         {
-Log-DebugLine "*** 4:"
+Log-DebugLine "*** 4: $variable = $value"
             [System.Environment]::SetEnvironmentVariable($variable, $value)
             Set-ActionOutput $variable $value
         }
