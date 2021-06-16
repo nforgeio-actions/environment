@@ -109,17 +109,24 @@ if (![System.String]::IsNullOrEmpty($masterPassword))
             [string]$vault = $null
         )
 
+Log-DebugLine "*** 0: name  = $name"
+Log-DebugLine "*** 0: vault = $vault"
+
         if ([System.String]::IsNullOrEmpty($vault))
         {
+Log-DebugLine "*** 1:"
             $value = Get-SecretValue -name $secretName -masterPassword $masterPassword -nullOnNotFound $false
         }
         else
         {
+Log-DebugLine "*** 2:"
             $value = Get-SecretValue -name $secretName -vault $vault -masterPassword $masterPassword -nullOnNotFound $false
         }
+Log-DebugLine "*** 3: value = $value"
 
         if (![System.String]::IsNullOrEmpty($value))
         {
+Log-DebugLine "*** 4:"
             [System.Environment]::SetEnvironmentVariable($variable, $value)
             Set-ActionOutput $variable $value
         }
